@@ -1,0 +1,16 @@
+#register-window{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    justify-content: space-evenly;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+    max-width: 1000px;
+    padding: 10px;
+}
+
+#register-window form{
+    display: flex;
+    flex-flow: column;
+}

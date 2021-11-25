@@ -1,0 +1,14 @@
+{
+    "Username": "Nazwa użytkownika",
+    "Password": "Hasło",
+    "Remember me": "Zapamiętaj mnie",
+    "Forgot your password?": "Zapomniałeś hasła?",
+    "Log in": "Logowanie",
+    "Confirm Password": "Powtórz hasło",
+    "Already registered?": "Masz już konto?",
+    "Register": "Rejestracja",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Zapomniałeś swojego hasła? Żaden problem. Wpisz poniżej adres e-mail powiązany z Twoim kontam, a my wyślemy Ci link do zresetowania hasła.",
+    "Email Password Reset Link": "Resetuj hasło",
+    "Whoops! Something went wrong.": "Ups! Coś poszło nie tak!"
+
+}
