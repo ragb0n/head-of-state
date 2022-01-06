@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\City;
+use App\Models\Resource;
+use App\Models\Research;
+use App\Models\Grid;
+use App\Models\Building;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -43,6 +48,50 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        $cityLocation = Grid::create([
+            'x' => 1,
+            'y' => 1
+        ]);
+
+       $newCity = City::create([
+            'player_id' => $user->id,
+            'field_id' => $cityLocation->id
+        ]);
+
+        $buildingCounter = 1;
+
+        while($buildingCounter <= 9){
+            Building::create([
+                'city_id' => $newCity->id,
+                'type' => $buildingCounter
+            ]);
+            $buildingCounter++;
+        }
+
+        Resource::create([
+            'city_id' => $newCity->id,
+            'silver' => 1000,
+            'stone' => 500,
+            'wood' => 500
+        ]);
+
+
+        Research::create([
+            'city_id' => $newCity->id,
+            'chemistry_level' => 0,
+            'forestry_level' => 0,
+            'metallurgy_level' => 0,
+            'logistics_level' => 0,
+            'economics_level' => 0,
+            'spatial_planning_level' => 0,
+            'military_defensive_level' => 0,
+            'military_offensive_level' => 0,
+            'aeronautics_level' => 0,
+            'automotive_level' => 0,
+            'balistics_level' => 0,
+            'intelligence_level' => 0
         ]);
 
         event(new Registered($user));

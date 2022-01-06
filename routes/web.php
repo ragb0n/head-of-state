@@ -26,9 +26,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])
         ->name('profile.update');}); 
 
-    Route::resource(name: 'buildings', controller: BuildingController::class);
-    Route::resource(name: 'researches', controller: ResearchController::class);
-    Route::resource(name: 'units', controller: UnitController::class);
+    Route::resource(name: 'buildings', controller: BuildingController::class)->middleware('auth');
+    Route::resource(name: 'researches', controller: ResearchController::class)->middleware('auth');;
+    Route::resource(name: 'units', controller: UnitController::class)->middleware('auth');;
 
 
     require __DIR__.'/auth.php';

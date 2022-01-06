@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUsernameToUsersTable extends Migration
+class CreatePathsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddUsernameToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username');
+        Schema::create('paths', function (Blueprint $table) {
+            $table->id();
+            $table->integer('path_id')->unsigned();
+            $table->integer('field_id')->unsigned();
+            $table->timestamp('finished_at');
+            $table->index('path_id');
         });
     }
 
@@ -25,8 +29,6 @@ class AddUsernameToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
-        });
+        Schema::dropIfExists('paths');
     }
 }

@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Resource extends Model
+class City extends Model
 {
     use HasFactory;
 
+    protected $table = 'cities';
+
     protected $fillable = [
-        'city_id',
-        'silver',
-        'stone',
-        'wood'
+        'name',
+        'player_id',
+        'field_id'
     ];
 }

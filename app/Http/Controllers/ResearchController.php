@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Research;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ResearchController extends Controller
@@ -14,7 +15,7 @@ class ResearchController extends Controller
      */
     public function index()
     {
-        $researches = Research::where('id', '2')->get();
+        $researches = Research::where('id', Auth::id())->get();
 
         return view('researches', [
             'researches' => $researches,

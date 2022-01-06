@@ -42,10 +42,10 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Huta
+                                              Kamieniołom
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              Huta odpowiada za produkcję stali. Im wyższy poziom, tym większy <br>
+                                              Kamieniołom odpowiada za produkcję kamienia. Im wyższy poziom, tym większy <br>
                                               godzinowy przyrost tego surowca.
                                             </div>
                                           </div>
@@ -53,49 +53,16 @@
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->steelworks_level }}
+                                          {{ $buildings[0]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['1']['money']}}
+                                          D: {{ $prices['1']['wood']}}
+                                          K: {{ $prices['1']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                          <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/steel_storage.png" alt="">
-                                          </div>
-                                          <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
-                                              Skład stali
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                              Poziom składu stali określa maksymalną ilość tego surowca, <br>
-                                              jaka może zostać zmagazynowana. Jeżeli osiagnięty zostanie limit, <br>
-                                              produkcja tego surowaca zostanie wstrzymana. Wyższy poziom składu <br>
-                                              pozwala na bardziej efektywne metody magazynowanie stali, a co <br>
-                                              za tym idzie, większe ilości stali mogą być składowane. <br>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->steel_storage_level }}
-                                        </div>
-                                      </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['1'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -120,49 +87,16 @@
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->sawmill_level }}
+                                          {{ $buildings[1]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['2']['money']}}
+                                          D: {{ $prices['2']['wood']}}
+                                          K: {{ $prices['2']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                          <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/wood_storage.png" alt="">
-                                          </div>
-                                          <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
-                                              Skład drewna
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                              Poziom składu drewna określa maksymalną ilość tego surowca, <br>
-                                              jaka może zostać zmagazynowana. Jeżeli osiagnięty zostanie limit, <br>
-                                              produkcja tego surowaca zostanie wstrzymana. Wyższy poziom składu <br>
-                                              pozwala na bardziej efektywne metody magazynowanie drewna, a co <br>
-                                              za tym idzie, większe ilości drewna mogą być składowane. <br>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->wood_storage_level }}
-                                        </div>
-                                      </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['2'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -176,10 +110,10 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Rafineria
+                                              Kopalnia srebra
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              Rafineria odpowiada za produkcję ropy. Im wyższy poziom, tym większy <br> 
+                                              Rafineria odpowiada za produkcję srebra. Im wyższy poziom, tym większy <br> 
                                               godzinowy przyrost tego surowca.
                                             </div>
                                           </div>
@@ -187,14 +121,16 @@
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->refinery_level }}
+                                          {{ $buildings[2]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['3']['money']}}
+                                          D: {{ $prices['3']['wood']}}
+                                          K: {{ $prices['3']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['3'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -208,28 +144,30 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Skład ropy
+                                              Magazyn
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              Poziom składu ropy określa maksymalną ilość tego surowca, <br>
+                                              Poziom magazynu określa maksymalną ilość surowców, <br>
                                               jaka może zostać zmagazynowana. Jeżeli osiagnięty zostanie limit, <br>
-                                              produkcja tego surowaca zostanie wstrzymana. Wyższy poziom składu <br>
-                                              pozwala na bardziej efektywne metody magazynowanie ropy, a co <br>
-                                              za tym idzie, większe ilości ropy mogą być składowane. <br>
+                                              produkcja surowców zostanie wstrzymana. Wyższy poziom magazynu <br>
+                                              pozwala na bardziej efektywne metody magazynowanie surowców, a co <br>
+                                              za tym idzie, większe ilości zasobów mogą być składowane. <br>
                                             </div>
                                           </div>
                                         </div>
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->oil_storage_level }}
+                                          {{ $buildings[3]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['4']['money']}}
+                                          D: {{ $prices['4']['wood']}}
+                                          K: {{ $prices['4']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['4'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -243,27 +181,28 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Osiedle mieszkalne
+                                              Zagroda 
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              Poziom osiedla mieszkalnego określa ilość ludności będącej aktualnie <br>
-                                              do Twojej dyspozycji. Każdy budynek wymaga do funkcjonowania określonej<br>
-                                              liczby ludzi. Również rekrutacja nowych jednostek zużywa wolną część populacji.<br>
-                                              Im wyższy poziom osiedla, tym większa jest liczba dostępnej populacji.
+                                              Populacja Twojego polis jest zależna od poziomu rozbudowy Twojej zagrody. <br>
+                                              Im wyższy jej poziom, tym więcej żywności jest w stanie wytworzyć, a więc i <br>
+                                              wykarmić większą liczbę mieszkańców.
                                             </div>
                                           </div>
                                         </div>
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->residential_level }}
+                                          {{ $buildings[4]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['5']['money']}}
+                                          D: {{ $prices['5']['wood']}}
+                                          K: {{ $prices['5']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['5'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -277,26 +216,28 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Bank
+                                              Siedziba władz
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              Bank odpowiada za dbanie o wartość pieniądza oraz pobieranie podatków od populacji.<br>
-                                              Im wyższy poziom banku, tym wyższy współczynnik poboru podatków od posiadanej populacji, <br>
-                                              a co za tym idzie - większy przyrost godzinowy funduszy.
+                                              W siedzibie władz urzędujesz Ty oraz Twoja administracja <br>
+                                              Im bardziej rozwinięta siedziba, a co za tym idzie administracja, tym szybciej <br>
+                                              przebiega budowa nowych budynków.
                                             </div>
                                           </div>
                                         </div>
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->bank_level }}
+                                          {{ $buildings[5]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['6']['money']}}
+                                          D: {{ $prices['6']['wood']}}
+                                          K: {{ $prices['6']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['6'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -310,11 +251,11 @@
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                              Garnizon
+                                              Koszary
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                              W garnizonie rekrutowane są wojska. Im bardziej rozbudowany, tym bardziej <br>
-                                              zaaawnsowane jednostki moga być rekrutowane. Wyższy poziom garnizonu skraca <br>
+                                              W koszarach rekrutowane są wojska. Im bardziej rozbudowane, tym bardziej <br>
+                                              zaaawnsowane jednostki moga być rekrutowane. Wyższy poziom koszar skraca <br>
                                               również czas rekrutacji jednostek.
                                             </div>
                                           </div>
@@ -322,14 +263,16 @@
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->garrison_level }}
+                                          {{ $buildings[6]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['7']['money']}}
+                                          D: {{ $prices['7']['wood']}}
+                                          K: {{ $prices['7']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['7'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
@@ -356,14 +299,49 @@
                                       </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                          {{ $buildings[0]->laboratory_level }}
+                                          {{ $buildings[7]->level }}
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['8']['money']}}
+                                          D: {{ $prices['8']['wood']}}
+                                          K: {{ $prices['8']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $building_times['8'] }}
+                                        </td>
+                                      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                          <div class="flex-shrink-0 h-12 w-12">
+                                            <img class="h-10 w-10" src="/images/laboratory.png" alt="">
+                                          </div>
+                                          <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                              Fort
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                              Solidne fortyfikacje wokół Twojego polis zapewniają bonus do obrony w razie wrogiego ataku.
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">
+                                          {{ $buildings[8]->level }}
+                                        </div>
+                                      </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                          S: {{ $prices['9']['money']}}
+                                          D: {{ $prices['9']['wood']}}
+                                          K: {{ $prices['9']['stone']}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                          {{ $building_times['9'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>

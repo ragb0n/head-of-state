@@ -318,68 +318,6 @@
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Dron szpiegowski
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Prosty, bezzałogowy dron szpiegowski. Jego potencjał ofensywny jak i defensywny <br>
-                                                jest praktyczni równy zeru, jednak pozwala na zdobycie informacji o wrógu, takich jak <br>
-                                                posiadana liczba zasobów, wojsk, poziom rozwoju jego technologii itp.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Dron szpiegowski
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Prosty, bezzałogowy dron szpiegowski. Jego potencjał ofensywny jak i defensywny <br>
-                                                jest praktyczni równy zeru, jednak pozwala na zdobycie informacji o wrógu, takich jak <br>
-                                                posiadana liczba zasobów, wojsk, poziom rozwoju jego technologii itp.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
                                                 Samobieżna wyrzutnia rakiet
                                               </div>
                                               <div class="text-sm text-gray-500">

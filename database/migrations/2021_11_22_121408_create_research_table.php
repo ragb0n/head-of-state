@@ -15,7 +15,7 @@ class CreateResearchTable extends Migration
     {
         Schema::create('research', function (Blueprint $table) {
             $table->id();
-            $table->integer('player');
+            $table->integer('city_id');
             $table->integer('chemistry_level');
             $table->integer('forestry_level');
             $table->integer('metallurgy_level');
