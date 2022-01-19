@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -20,10 +20,6 @@
                                 <div>
                                     <x-label for="username" :value="__('Nazwa użytkownika')" />
                                     <x-input id="username" class="block mt-1 w-full" type="text" name="username" value="{{ auth()->user()->username }}" autofocus />
-                                </div>
-                                <div>
-                                    <x-label for="email" :value="__('E-mail')" />
-                                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ auth()->user()->email }}" autofocus />
                                 </div>
                             </div>
                             <div class="grid grid-rows-2 gap-6">
@@ -44,6 +40,33 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-end mt-4">
+                            <x-button class="ml-3">
+                                {{ __('Zapisz') }}
+                            </x-button>
+                        </form>
+                            <form action="{{ route('profile.destroy') }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <x-button class="ml-3 bg-red-700">
+                                    Usuń konto
+                                </x-button>
+                            </form>
+                        </div>
+                    <form method="POST" action="/profile/rename">
+                        @csrf
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="grid grid-rows-2 gap-6">
+                                <div>
+                                    <div> Aktualna nazwa osady: </div>
+                                    <div class="font-bold text-xl">{{ $city_name }}</div>
+                                </div>
+                                <div>
+                                    <x-label for="city_name" :value="__('Nowa nazwa osady')" />
+                                    <x-input id="city_name" class="block mt-1 w-full" type="text" name="city_name" value="" autofocus />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center mt-4">
                             <x-button class="ml-3">
                                 {{ __('Zapisz') }}
                             </x-button>

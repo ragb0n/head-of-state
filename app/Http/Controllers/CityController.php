@@ -9,6 +9,9 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\City;
+use App\Models\Task;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,131 +19,46 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
- /**
-     * @param $id
-     * @return $this|\Illuminate\View\View
-     */
-    public function getCity($id)
-    {
-        TaskController::checkTasks();
+    public function index(){
+        $cities = DB::table('cities')
+        ->join('users', 'users.id', '=', 'cities.player_id')
+        ->join('grids', 'grids.id', '=', 'cities.field_id')
+        ->get();
 
-        $city = City::where('id', $id)->first();
-
-        if ($this->validateOwner($city)) {
-
-            $production = ResourceController::processProduction($city);
-
-            $building_slot = $city->building_slot;
-
-            $buildings = $building_slot->building;
-
-            foreach ($buildings as $building) {
-                BuildingController::buildingWearing($building);
-            }
-
-            $wall = $building_slot->wall;
-            $wall = Building::find($wall);
-
-            $building_slot = array_slice($building_slot->toArray(), 3, 25);
-
-            return view('city', [
-                'city' => $city,
-                'building_slot' => $building_slot,
-                'buildings' => $buildings,
-                'help' => '/help/city',
-                'production' => $production,
-                'wall' => $wall,
+            return view('map', [
+                'cities' => $cities
             ]);
-
-        } else {
-            return redirect('/home')->withErrors('Nem a te városod');
-        }
     }
-
-    public function getNewCity()
-    {
-
-//        $hex_id = $this->randomHex();
-
-//        echo $hex_id;
-//        $name = "róma2";
-//        $this->createCity(Auth::user(), 0, $hex_id, $name);
-        return "ok";
-
-    }
-
-    public function getWall($id)
+    
+    public function getCity()
     {
         TaskController::checkTasks();
 
-        $city = City::where('id', $id)->first();
+        
+        $city = City::where('player_id', Auth::id())->first();
+        $city_name = $city->name;
+        $build_in_progress = DB::table('tasks')
+        ->join('buildings', 'buildings.id', '=', 'tasks.building_id')
+        ->where('tasks.city_id', Auth::id())
+        ->get();
 
-        if (!$this->validateOwner($city)) {
-            return redirect('/home')->withErrors('Nem a te városod');
-        }
+        $production = ResourceController::executeProduction($city);
 
-        $wall = $city->building_slot->wall;
-
-        $wall = Building::find($wall);
-
-        $production = ResourceController::processProduction($city);
-
-        return view('wall', ['city' => $city, 'wall' => $wall, 'production' => $production]);
+            return view('dashboard', [
+                'production' => $production,
+                'city_name' => $city_name,
+                'build_in_progress' => $build_in_progress
+            ]);
     }
 
-    public function healWall(Request $request, $city_id)
-    {
-        $city = City::where('id', $city_id)->first();
+    public function renameCity(Request $request){
+        $new_name = $request->input('city_name');
+        $city = City::where('player_id', Auth::id())->first();
 
-        if (!$this->validateOwner($city)) {
-            return redirect('/home')->withErrors('Nem a te városod');
-        }
+        $city->name = $new_name;
+        $city->save();
+        
+        return redirect()->route('profile')->with('message', 'Nazwa miasta zmieniona pomyślnie');
 
-        $wall = $city->building_slot->wall;
-
-        $wall = Building::find($wall);
-
-        $this->validate($request, [
-            'health' => 'required|integer|max:100',
-        ]);
-        $health = $request->input('health');
-
-        $price = [
-            'iron' => $health,
-            'food' => $health,
-            'stone' => $health,
-            'lumber' => $health,
-        ];
-
-        $time = $health;
-
-        $this->heal($city, $wall, $price, $time, $health);
-
-        return redirect("/city/$city_id/wall");
-
-    }
-
-    public function addFoodToArmy(Request $request, $city_id)
-    {
-        $city = City::where('id', $city_id)->first();
-
-        if (!$this->validateOwner($city)) {
-            return redirect('/home')->withErrors('Nem a te városod');
-        }
-        $food = $request->input("army_food");
-
-        if(!$city->resources->food >= $food){
-            return redirect("/city/$city_id")->withErrors('Nincs elég élelmiszer');
-        }
-
-        $army = $city->army();
-
-        $army->food += $food;
-        $army->save();
-
-        $city->resources->food -= $food;
-        $city->resources->save();
-
-        return redirect("/city/$city_id");
     }
 }

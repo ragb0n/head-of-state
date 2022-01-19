@@ -10,7 +10,6 @@ class PageController extends Controller
     public function index(){
         $pages = ModelsPage::all();
 
-        dd($pages);
     }
 
     public function show($id){

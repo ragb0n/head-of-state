@@ -26,10 +26,13 @@
                     <x-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
                         {{ __('Armia') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dyplomacja') }}
+                    <x-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
+                        {{ __('Dyplomacja') }} &nbsp <b>@include('messenger.unread-count')</b>
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('map.index')" :active="request()->routeIs('map.index')">
+                        {{ __('Świat') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.index')">
                         {{ __('Ranking') }}
                     </x-nav-link>
                 </div>
@@ -89,19 +92,22 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Podgląd') }}
             </x-responsive-nav-link>
-            <x-nav-link :href="route('buildings.index')" :active="request()->routeIs('buildings.index')">
+            <x-responsive-nav-link :href="route('buildings.index')" :active="request()->routeIs('buildings.index')">
                 {{ __('Budynki') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('researches.index')" :active="request()->routeIs('researches.index')">
                 {{ __('Badania') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-linkk>
             <x-responsive-nav-link :href="route('units.index')" :active="request()->routeIs('units.index')">
                 {{ __('Armia') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dyplomacja') }}
+            <x-responsive-nav-link :href="route('messages')" :active="request()->routeIs('messages')">
+                {{ __('Dyplomacja') }} &nbsp <b>@include('messenger.unread-count')</b>
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('map.index')" :active="request()->routeIs('map.index')">
+                {{ __('Świat') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.idex')">
                 {{ __('Ranking') }}
             </x-responsive-nav-link>
         </div>

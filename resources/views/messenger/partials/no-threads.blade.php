@@ -1,0 +1,1 @@
+<p class="text-center">Brak rozmów</p>

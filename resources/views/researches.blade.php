@@ -4,9 +4,9 @@
             {{ __('Badania') }}
         </h2>
     </x-slot>
-
+    <script src="{{asset('js/countdown.js')}}"></script>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex flex-col">
@@ -38,11 +38,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/chemistry.png" alt="">
+                                                <img  src="/images/cog.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    Chemia
+                                                    Inżynieria
                                                 </div>
                                                 <div class="text-sm text-gray-500">
                                                 Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
@@ -54,24 +54,37 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->chemistry_level }}
+                                                {{ $researches[0]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['1']['silver']}}
+                                            D: {{ $prices['1']['wood']}}
+                                            K: {{ $prices['1']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['1'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[0] != null)
+                                        <script>
+                                            countdown({{ $times_to_end[0] }});
+                                          </script>
+                                            <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['1']['wood'] && $owned_resources[0]['silver'] >=  $prices['1']['silver'] && $owned_resources[0]['stone'] >=  $prices['1']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[0]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/forestry.png" alt="">
+                                                <img  src="/images/forestry.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
@@ -87,28 +100,41 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->forestry_level }}
+                                                {{ $researches[1]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['2']['silver']}}
+                                            D: {{ $prices['2']['wood']}}
+                                            K: {{ $prices['2']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['2'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[1] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[1] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['2']['wood'] && $owned_resources[0]['silver'] >=  $prices['2']['silver'] && $owned_resources[0]['stone'] >=  $prices['2']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[1]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                         
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/metallurgy.png" alt="">
+                                                <img  src="/images/pick.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    Metalurgia
+                                                    Geologia
                                                 </div>
                                                 <div class="text-sm text-gray-500">
                                                 Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
@@ -120,24 +146,37 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->metallurgy_level }}
+                                                {{ $researches[2]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['3']['silver']}}
+                                            D: {{ $prices['3']['wood']}}
+                                            K: {{ $prices['3']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['3'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[2] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[2] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['3']['wood'] && $owned_resources[0]['silver'] >=  $prices['3']['silver'] && $owned_resources[0]['stone'] >=  $prices['3']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[2]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                        
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/logistics.png" alt="">
+                                                <img  src="/images/storage.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
@@ -153,28 +192,40 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->logistics_level }}
+                                                {{ $researches[3]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['4']['silver']}}
+                                            D: {{ $prices['4']['wood']}}
+                                            K: {{ $prices['4']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['4'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                        @if($times_to_end[3] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[3] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['4']['wood'] && $owned_resources[0]['silver'] >=  $prices['4']['silver'] && $owned_resources[0]['stone'] >=  $prices['4']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[3]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/economics.png" alt="">
+                                                <img  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    Nauki ekonomiczne
+                                                    Sztuka wojenna
                                                 </div>
                                                 <div class="text-sm text-gray-500">
                                                 Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
@@ -186,28 +237,41 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->economics_level }}
+                                                {{ $researches[6]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['7']['silver']}}
+                                            D: {{ $prices['7']['wood']}}
+                                            K: {{ $prices['7']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['7'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[6] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[6] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['7']['wood'] && $owned_resources[0]['silver'] >=  $prices['7']['silver'] && $owned_resources[0]['stone'] >=  $prices['7']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[6]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                         
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/planning.png" alt="">
+                                                <img  src="/images/intelligence.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    Planowanie przestrzenne
+                                                    Wywiad
                                                 </div>
                                                 <div class="text-sm text-gray-500">
                                                 Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
@@ -219,216 +283,30 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->spatial_planning_level }}
+                                                {{ $researches[7]->level }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                            S: {{ $prices['8']['silver']}}
+                                            D: {{ $prices['8']['wood']}}
+                                            K: {{ $prices['8']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                            {{ $research_times['8'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/army_defensive.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Wojskowe technologie obronne
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
-                                                bardziej efektywne zarządzanie finansami kraju. Wyższy poziom nieznacznie <br>
-                                                podwyższa przyrost Twoich funduszy.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->military_offensive_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/army_offensive.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Wojskowe technologie ofensywne
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
-                                                bardziej efektywne zarządzanie finansami kraju. Wyższy poziom nieznacznie <br>
-                                                podwyższa przyrost Twoich funduszy.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->military_defensive_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/aeronautics.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Aeronautyka
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
-                                                bardziej efektywne zarządzanie finansami kraju. Wyższy poziom nieznacznie <br>
-                                                podwyższa przyrost Twoich funduszy.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->aeronautics_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/moto.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Motoryzacja
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Lepsze zrozumienie mechanizmów ekonomicznych i finansowych pozwala na <br>
-                                                bardziej efektywne zarządzanie finansami kraju. Wyższy poziom nieznacznie <br>
-                                                podwyższa przyrost Twoich funduszy.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->automotive_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/balistics.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Balistyka
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Rozwój balistyki pozwala na tworzenie lepszych, bardziej zaawansowanych <br>
-                                                i śmiercionośnych pocisków rakietowych. Wyższy poziom odblokowywuje nowe <br>
-                                                jednostki rakietowe oraz polepsza właściwości bojowe tych już odblokowanych.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->balistics_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                                <img class="h-10 w-10" src="/images/intelligence.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Technologie wywiadowcze
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                Technologie wywiadowcze pozwaalają na tworzenie coraz lepszych urządzweń <br>
-                                                pozwalających na przeprowadzanie elektronicznego wywiadu na terenie wroga. <br>
-                                                Im wyższy poziom, tym skuteczniejsze w działaniu są drony szpiegowskie oraz <br>
-                                                wyższa szansa na to, wrogie drony zostaną wykryte i unieszkodliwione.
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">
-                                                {{ $researches[0]->intelligence_level }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[7] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[7] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['8']['wood'] && $owned_resources[0]['silver'] >=  $prices['8']['silver'] && $owned_resources[0]['stone'] >=  $prices['8']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/researches/' . $researches[7]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                          
                                         </td>
                                     </tr>
                                 </tbody>

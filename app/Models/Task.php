@@ -9,56 +9,33 @@ class Task extends Model
 {
     use HasFactory;
 
-      /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'tasks';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['type', 'user_id', 'city_id', 'building_id', 'finished_at'];
+    protected $fillable = ['type', 'user_id', 'city_id', 'building_id', 'research_id', 'completed', 'finished_at'];
 
     protected $dates = array('finished_at');
 
 
     public function city()
     {
-        return $this->belongsTo('App\City', 'city_id');
+        return $this->belongsTo('App\Models\City', 'city_id');
     }
 
     public function building()
     {
-        return $this->belongsTo('App\Building', 'building_id');
+        return $this->belongsTo('App\Models\Building', 'building_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function army()
     {
-        return $this->belongsTo('App\Army', 'army_id');
+        return $this->belongsTo('App\Models\Army', 'army_id');
     }
 
     public function path()
     {
         return $this->hasMany('App\Path', 'path_id', 'path_id');
     }
-
-
-    private $types = [
-        1 => 'create a worker',
-        2 => 'create a settler',
-        3 => 'create a general',
-
-        11 => 'train a light infantry',
-        12 => 'train a heavy infantry, etc...',
-        20 => 'moving'
-    ];
 }

@@ -2,11 +2,11 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Budynki') }}
-        </h2>
+          </h2>
     </x-slot>
-
+    <script src="{{asset('js/countdown.js')}}"></script>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                   <div class="flex flex-col">
@@ -38,7 +38,7 @@
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                            <img  src="/images/quarry.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -57,7 +57,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['1']['money']}}
+                                          S: {{ $prices['1']['silver']}}
                                           D: {{ $prices['1']['wood']}}
                                           K: {{ $prices['1']['stone']}}
                                         </td>
@@ -65,14 +65,25 @@
                                           {{ $building_times['1'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[0] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[0] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['1']['wood'] && $owned_resources[0]['silver'] >=  $prices['1']['silver'] && $owned_resources[0]['stone'] >=  $prices['1']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[0]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/sawmill.png" alt="">
+                                            <img  src="/images/saw.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -91,7 +102,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['2']['money']}}
+                                          S: {{ $prices['2']['silver']}}
                                           D: {{ $prices['2']['wood']}}
                                           K: {{ $prices['2']['stone']}}
                                         </td>
@@ -99,14 +110,25 @@
                                           {{ $building_times['2'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[1] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[1] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['2']['wood'] && $owned_resources[0]['silver'] >=  $prices['2']['silver'] && $owned_resources[0]['stone'] >=  $prices['2']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[1]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/rafinery.png" alt="">
+                                            <img  src="/images/pick.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -125,7 +147,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['3']['money']}}
+                                          S: {{ $prices['3']['silver']}}
                                           D: {{ $prices['3']['wood']}}
                                           K: {{ $prices['3']['stone']}}
                                         </td>
@@ -133,14 +155,25 @@
                                           {{ $building_times['3'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[2] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[2] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['3']['wood'] && $owned_resources[0]['silver'] >=  $prices['3']['silver'] && $owned_resources[0]['stone'] >=  $prices['3']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[2]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/oil_storage.png" alt="">
+                                            <img  src="/images/storage.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -162,7 +195,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['4']['money']}}
+                                          S: {{ $prices['4']['silver']}}
                                           D: {{ $prices['4']['wood']}}
                                           K: {{ $prices['4']['stone']}}
                                         </td>
@@ -170,49 +203,25 @@
                                           {{ $building_times['4'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[3] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[3] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['4']['wood'] && $owned_resources[0]['silver'] >=  $prices['4']['silver'] && $owned_resources[0]['stone'] >=  $prices['4']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[3]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/residental.png" alt="">
-                                          </div>
-                                          <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
-                                              Zagroda 
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                              Populacja Twojego polis jest zależna od poziomu rozbudowy Twojej zagrody. <br>
-                                              Im wyższy jej poziom, tym więcej żywności jest w stanie wytworzyć, a więc i <br>
-                                              wykarmić większą liczbę mieszkańców.
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
-                                          {{ $buildings[4]->level }}
-                                        </div>
-                                      </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['5']['money']}}
-                                          D: {{ $prices['5']['wood']}}
-                                          K: {{ $prices['5']['stone']}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          {{ $building_times['5'] }}
-                                        </td>
-                                      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                          <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/bank.png" alt="">
+                                            <img  src="/images/crown.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -232,7 +241,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['6']['money']}}
+                                          S: {{ $prices['6']['silver']}}
                                           D: {{ $prices['6']['wood']}}
                                           K: {{ $prices['6']['stone']}}
                                         </td>
@@ -240,14 +249,25 @@
                                           {{ $building_times['6'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[5] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[5] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['6']['wood'] && $owned_resources[0]['silver'] >=  $prices['6']['silver'] && $owned_resources[0]['stone'] >=  $prices['6']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[5]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-12 w-12 rounded-full" src="/images/garrison.png" alt="">
+                                            <img src="/images/garrison.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -267,7 +287,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['7']['money']}}
+                                          S: {{ $prices['7']['silver']}}
                                           D: {{ $prices['7']['wood']}}
                                           K: {{ $prices['7']['stone']}}
                                         </td>
@@ -275,14 +295,25 @@
                                           {{ $building_times['7'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[6] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[6] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['7']['wood'] && $owned_resources[0]['silver'] >=  $prices['7']['silver'] && $owned_resources[0]['stone'] >=  $prices['7']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[6]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/laboratory.png" alt="">
+                                            <img  src="/images/laboratory.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -303,7 +334,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['8']['money']}}
+                                          S: {{ $prices['8']['silver']}}
                                           D: {{ $prices['8']['wood']}}
                                           K: {{ $prices['8']['stone']}}
                                         </td>
@@ -311,14 +342,25 @@
                                           {{ $building_times['8'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[7] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[7] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['8']['wood'] && $owned_resources[0]['silver'] >=  $prices['8']['silver'] && $owned_resources[0]['stone'] >=  $prices['8']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[7]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                                     <tr>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                           <div class="flex-shrink-0 h-12 w-12">
-                                            <img class="h-10 w-10" src="/images/laboratory.png" alt="">
+                                            <img  src="/images/fort.png" alt="">
                                           </div>
                                           <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -336,7 +378,7 @@
                                         </div>
                                       </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          S: {{ $prices['9']['money']}}
+                                          S: {{ $prices['9']['silver']}}
                                           D: {{ $prices['9']['wood']}}
                                           K: {{ $prices['9']['stone']}}
                                         </td>
@@ -344,7 +386,18 @@
                                           {{ $building_times['9'] }}
                                         </td>
                                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
+                                        @if($times_to_end[8] != null)
+                                        <script>
+                                          countdown({{ $times_to_end[8] }});
+                                        </script>
+                                          <div id="timer"></div>
+                                        @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                        @elseif($owned_resources[0]['wood'] >=  $prices['9']['wood'] && $owned_resources[0]['silver'] >=  $prices['9']['silver'] && $owned_resources[0]['stone'] >=  $prices['9']['stone'])
+                                        <a href="{{ url('/city/' . $user_id . '/buildings/' . $buildings[8]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                        @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                        @endif                                      
                                       </td>
                                     </tr>
                               </tbody>

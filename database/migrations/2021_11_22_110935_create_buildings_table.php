@@ -17,7 +17,7 @@ class CreateBuildingsTable extends Migration
             $table->id();
             $table->integer('city_id')->unsigned();
             $table->integer('type')->unsigned();
-            $table->integer('level')->default(0);
+            $table->integer('level')->default(1);
             $table->timestamps();
             $table->timestamp('finished_at')->nullable();
         });

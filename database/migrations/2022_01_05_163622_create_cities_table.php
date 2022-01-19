@@ -15,7 +15,7 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->default('Twoje polis');
+            $table->string('name')->default('Twoje polis');
             $table->integer('player_id')->unique();
             $table->integer('free_slots')->default(10);
             $table->integer('occupied_slots')->default(0);

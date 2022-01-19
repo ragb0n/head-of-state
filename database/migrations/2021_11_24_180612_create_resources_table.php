@@ -16,9 +16,9 @@ class CreateResourcesTable extends Migration
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->integer('city_id');
-            $table->integer('silver')->default(1000);
-            $table->integer('stone')->default(500);
-            $table->integer('wood')->default(500);
+            $table->integer('silver')->default(200);
+            $table->integer('stone')->default(200);
+            $table->integer('wood')->default(200);
             $table->timestamps();
         });
     }

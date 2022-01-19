@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Army;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Resource;
 use App\Models\Research;
 use App\Models\Grid;
+use App\Models\Ranking;
+use App\Models\Unit;
 use App\Models\Building;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -40,13 +43,11 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'min:5', 'max:20', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'username' => $request->username,
-            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
@@ -71,28 +72,45 @@ class RegisteredUserController extends Controller
         }
 
         Resource::create([
-            'city_id' => $newCity->id,
-            'silver' => 1000,
-            'stone' => 500,
-            'wood' => 500
+            'city_id' => $newCity->id
         ]);
 
+        $researchCounter = 1;
 
-        Research::create([
-            'city_id' => $newCity->id,
-            'chemistry_level' => 0,
-            'forestry_level' => 0,
-            'metallurgy_level' => 0,
-            'logistics_level' => 0,
-            'economics_level' => 0,
-            'spatial_planning_level' => 0,
-            'military_defensive_level' => 0,
-            'military_offensive_level' => 0,
-            'aeronautics_level' => 0,
-            'automotive_level' => 0,
-            'balistics_level' => 0,
-            'intelligence_level' => 0
+        while($researchCounter <= 9){
+            Research::create([
+                'city_id' => $newCity->id,
+                'type' => $researchCounter
+            ]);
+            $researchCounter++;
+        }
+
+        $unitCounter = 1;
+
+        while($unitCounter <= 9){
+            Unit::create([
+                'city_id' => $newCity->id,
+                'type' => $unitCounter
+            ]);
+            $unitCounter++;
+        }
+
+        Ranking::create([
+            'player_id' => $user->id
         ]);
+
+        // Army::create([
+        //     'militia_count' => 0,
+        //     'walkers_count' => 0,
+        //     'slingers_count' => 0,
+        //     'archers_count' => 0,
+        //     'hoplites_count' => 0,
+        //     'cavalrymen_count' => 0,
+        //     'chariots_count' => 0,
+        //     'catapults_count' => 0,
+        //     'city_id' => $newCity->id,
+        //     'current_field_id' => $cityLocation->id
+        // ]);
 
         event(new Registered($user));
 

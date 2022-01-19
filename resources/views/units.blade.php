@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex flex-col">
@@ -38,7 +38,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
@@ -52,27 +52,36 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[0]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['1']['silver']}}
+                                          D: {{ $prices['1']['wood']}}
+                                          K: {{ $prices['1']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['1'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[0] != null)
+                                            {{ $times_to_end[0] }}
+                                          @elseif(in_array(isset($times_to_end), $times_to_end))
+                                            <span class="text-grey-600 font-bold">Buduj</span>
+                                          @elseif($owned_resources[0]['wood'] >=  $prices['1']['wood'] && $owned_resources[0]['silver'] >=  $prices['1']['silver'] && $owned_resources[0]['stone'] >=  $prices['1']['stone'])
+                                            <a href="{{ url('/city/' . $user_id . '/units/' . $units[0]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                          @else
+                                            <span class="text-red-600 font-bold">Buduj</span>
+                                          @endif                                          </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Piechota
+                                                Piechur
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Podstawowa jednostka każdej armii. Odpowiednio przeszkolona do prowadzenia <br>
@@ -83,27 +92,37 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[1]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['2']['silver']}}
+                                          D: {{ $prices['2']['wood']}}
+                                          K: {{ $prices['2']['stone']}}                                        
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['2'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[1] != null)
+                                          {{ $times_to_end[1] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['2']['wood'] && $owned_resources[0]['silver'] >=  $prices['2']['silver'] && $owned_resources[0]['stone'] >=  $prices['2']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[1]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                                  
+                                      </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Wóz bojowy
+                                                Procarz
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Opancerzony wóz bojowy. Oferuje znacznie większą siłę ognia jak i odporność <br>
@@ -113,27 +132,37 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[2]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['3']['silver']}}
+                                          D: {{ $prices['3']['wood']}}
+                                          K: {{ $prices['3']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['3'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[2] != null)
+                                          {{ $times_to_end[2] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['3']['wood'] && $owned_resources[0]['silver'] >=  $prices['3']['silver'] && $owned_resources[0]['stone'] >=  $prices['3']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[2]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                             
+                                      </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Czołg lekki
+                                                Łucznik
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Podstawowa jednostka pancerna. Czołgi lekkie stanowią trzon Twoich sił zbrojnych. <br>
@@ -143,27 +172,36 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[3]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['4']['silver']}}
+                                          D: {{ $prices['4']['wood']}}
+                                          K: {{ $prices['4']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['4'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[3] != null)
+                                          {{ $times_to_end[3] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['4']['wood'] && $owned_resources[0]['silver'] >=  $prices['4']['silver'] && $owned_resources[0]['stone'] >=  $prices['4']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[3]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                             </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Czołg ciężki
+                                                Hoplita
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Lepiej opancerzona i uzbrojona wersja czołgu lekkiego. Jest w stanie zadać większe <br>
@@ -174,27 +212,37 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[4]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['5']['silver']}}
+                                          D: {{ $prices['5']['wood']}}
+                                          K: {{ $prices['5']['stone']}}                                        
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['5'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[4] != null)
+                                          {{ $times_to_end[4] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['5']['wood'] && $owned_resources[0]['silver'] >=  $prices['5']['silver'] && $owned_resources[0]['stone'] >=  $prices['5']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[4]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                         
+                                      </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Działo przeciwlotnicze
+                                                Kawalerzysta
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Działo przeciwlotnicze stanowi tańszą i łatwiej dostępną alternatywę dla myśliwców. <br>
@@ -205,27 +253,37 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[5]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['6']['silver']}}
+                                          D: {{ $prices['6']['wood']}}
+                                          K: {{ $prices['6']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['6'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[5] != null)
+                                          {{ $times_to_end[5] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['6']['wood'] && $owned_resources[0]['silver'] >=  $prices['6']['silver'] && $owned_resources[0]['stone'] >=  $prices['6']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[5]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                              
+                                      </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Myśliwiec
+                                                Rydwan
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Podstawowa jednostka powietrzna. Przeznaczona głównie do niszczenie innych samolotów <br>
@@ -235,27 +293,37 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[6]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['7']['silver']}}
+                                          D: {{ $prices['7']['wood']}}
+                                          K: {{ $prices['7']['stone']}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['7'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[6] != null)
+                                          {{ $times_to_end[6] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['7']['wood'] && $owned_resources[0]['silver'] >=  $prices['7']['silver'] && $owned_resources[0]['stone'] >=  $prices['7']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[6]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                        
+                                      </td>
                                       </tr>
                                       <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
+                                              <img class="h-10 w-10"  src="/images/garrison.png" alt="">
                                             </div>
                                             <div class="ml-4">
                                               <div class="text-sm font-medium text-gray-900">
-                                                Bombowiec
+                                                Katapulta
                                               </div>
                                               <div class="text-sm text-gray-500">
                                                 Jednostka zadająca poważne obrażenia siłom lądowym wroga, jednak praktycznie <br>
@@ -267,171 +335,27 @@
                                           </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
+                                          {{ $units[7]->count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
+                                          S: {{ $prices['8']['silver']}}
+                                          D: {{ $prices['8']['wood']}}
+                                          K: {{ $prices['8']['stone']}}                                        
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
+                                          {{ $recruit_times['8'] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Dron szpiegowski
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Prosty, bezzałogowy dron szpiegowski. Jego potencjał ofensywny jak i defensywny <br>
-                                                jest praktyczni równy zeru, jednak pozwala na zdobycie informacji o wrógu, takich jak <br>
-                                                posiadana liczba zasobów, wojsk, poziom rozwoju jego technologii itp.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Samobieżna wyrzutnia rakiet
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Najprostsza z jednostek rakietowych. Jest w stanie strzelać mało precyzyjnymi <br>
-                                                salwami rakiet na danym obszarze, powodując i tak znaczące straty wśród jednostek <br>
-                                                lądowych wroga.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Zestaw rakiet samonaprowadzających
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Zestaw rakiet przeznaczonych do precyzyjnego niszczenia jednostek lądowych, <br>
-                                                jak i powietrznych przeciwnika. Zaawansowana technologia naprowadzania pozwala na <br>
-                                                zwiększenie skuteczności, jednak w zamian za większe koszty produkcji.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Mobilny system balistyczny
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Rakietowy pocisk balistyczny krótkiego zasięgu.Pozwala na dokonywanie bezpośrednich ataków <br>
-                                                rakietowych. Obrona przeciwlotnicza ma małą, lecz niezerową szansę unieszkodliwienia <br>
-                                                tego typu pocisku w locie. Najskuteczniejsza obroną jest jednak odpowiedni system przecirakietowy.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-12 w-12">
-                                              <img class="h-10 w-10" src="/images/steelworks.png" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                              <div class="text-sm font-medium text-gray-900">
-                                                Mobilny pocisk antybalistyczny
-                                              </div>
-                                              <div class="text-sm text-gray-500">
-                                                Rakietowy pocisk balistyczny służący do zwalczania innych pocisków rakietowych. <br>
-                                                Najskuteczniejsza obrona przed pociskami balistycznymi wroga.
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="text-sm text-gray-900">0</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --KOSZT--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            --CZAS--
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="text-indigo-600 hover:text-indigo-900">Buduj</a>
-                                        </td>
+                                          @if($times_to_end[7] != null)
+                                          {{ $times_to_end[7] }}
+                                      @elseif(in_array(isset($times_to_end), $times_to_end))
+                                          <span class="text-grey-600 font-bold">Buduj</span>
+                                      @elseif($owned_resources[0]['wood'] >=  $prices['8']['wood'] && $owned_resources[0]['silver'] >=  $prices['8']['silver'] && $owned_resources[0]['stone'] >=  $prices['8']['stone'])
+                                          <a href="{{ url('/city/' . $user_id . '/units/' . $units[7]->id) }}" class="text-green-600 hover:text-green-900 font-bold">Buduj</a>
+                                      @else
+                                          <span class="text-red-600 font-bold">Buduj</span>
+                                      @endif                                           
+                                      </td>
                                       </tr>
                                 </tbody>
                               </table>

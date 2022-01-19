@@ -2,111 +2,108 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
+use App\Models\City;
+use App\Models\Building;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Resource;
+use App\Models\Research;
 use Carbon\Carbon;
 
 class ResourceController extends Controller
 {
     public static function index(){
 
-        $resources = Resource::where('id', Auth::id())->get();
-
+        $resources = Resource::where('city_id', Auth::id())->get();
+        $city = City::find(Auth::id());
+        ResourceController::executeProduction($city);
         return [$resources];
     }
 
-    /**
-    * Wyliczenie i zapisanie wyprodukowanych przez miasto surowców w danym przedziale czasowym,
-    * tj. czasem obecnym (now), a czasem poprzedniej modyfikacji zasobów danego miasta,
-    */
-    public static function executeProduction(User $user)
+    public static function checkEnoughResources($price){
+        $resources = self::index();
+        if($resources[0][0]['wood'] >=  $price['wood'] && $resources[0][0]['silver'] >= $price['silver'] && $resources[0][0]['stone'] >= $price['stone'] ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function executeProduction(City $city)
     {
-        $resources = $user->resources;
+        $resources = $city->resources;
         $now = Carbon::now();
 
-        $production = self::calculateProduction($user); // wyliczenie produkcji na godzinę
+        $production = self::calculateProduction($city);
 
         $time = $resources->updated_at->diffInSeconds($now);
-
-        $time_prod = []; // the overall production
+        $time_prod = []; 
 
         foreach ($production as $key => $prod) {
-            if ($prod == 0) { // jeżeli produkcja = 0, omiń i leć dalej
-                continue;
-            }
-            $time_prod[$key] = number_format(($prod * ($time / 3600)), 2);
+            $time_prod[$key] = ($prod / 3600) * $time;
         }
 
-        // sprawdzenie wolnego miejsca w magazynu danym mieście
         $storage = self::calculateStorage($city);
-
-        $production['population'] = 0;
 
         foreach ($time_prod as $key => $value) {
             $new_resource_value = $resources->$key + $value;
 
-            // porównanie wolnego miejsca w magazynie danego surowca z ilością produkowanych surowców
-            // jeżeli surowców jest więcej niż miejsca w magazynie, stan surowców w mieście jest równy max pojemności magazynu
             if ($new_resource_value >= $storage) {
                 $resources->$key = $storage;
             } else {
-            // jeżeli surowców jest mniej niż miejsca w magazynie, stan surowców w mieście jest równy wyliczonej ilości
                 $resources->$key = $new_resource_value;
             }
         }
 
         $resources->save();
+
         return $production;
     }
 
-    /**
-    * Obliczenie godzinowej produkcji surowców w danym mieście na podstawie poziomów poszczególnych budynków produkcyjnych
-    * produkcja = (poziom budynku/2) * 330
-    */
-
-    public static function calculateProduction(User $user)
+    public static function calculateProduction(City $city)
     {
         $production = [
-            'money' => 0,
-            'steel' => 0,
-            'wood' => 0,
-            'oil' => 0,
+            'silver' => 60,
+            'wood' => 60,
+            'stone' => 60
         ];
 
-        foreach ($user->workingBuildings() as $building) {
-            $profit = number_format((($building->level / 2) * 330), 2);
+        $researches = Research::where('city_id', $city->id)->get();
+
+        foreach ($city->workingBuildings() as $building) {
 
             switch ($building->type) {
                 case 1:
-                    $production['money'] += $profit;
+                    $research_bonus = $researches[2]['level'] / 10;
+                    $profit = (($building->level / 2) + $research_bonus) * 330;
+                    $production['silver'] += $profit;
                     break;
                 case 2:
-                    $production['steel'] += $profit;
-                    break;
-                case 3:
+                    $research_bonus = $researches[1]['level'] / 10;
+                    $profit = (($building->level / 2) + $research_bonus) * 330;
                     $production['wood'] += $profit;
                     break;
-                case 4:
-                    $production['oil'] += $profit;
+                case 3:
+                    $research_bonus = $researches[2]['level'] / 10;
+                    $profit = (($building->level / 2) + $research_bonus) * 330;
+                    $production['stone'] += $profit;
                     break;
             }
         }
-
+        
         return $production;
 
     }
 
-    /**
-     * Obliczenie pojemności poszczególnych skłądów w danym mieście
-     */
-    public static function calculateStorage(User $user)
-    {
-        $now = Carbon::now();
-        $storage = 0;
 
-        $stores = $user->buildings->where('type', 4)->filter(function($building) use ($now){
+    public static function calculateStorage(City $city)
+    {
+        $storage_level = Building::where('city_id', $city->id)->where('type', 4)->first()->level;
+        $now = Carbon::now();
+        $research_bonus = Research::where('city_id', $city->id)->where('type', 4)->first()->level * 20;
+
+        $storage = 500 * 1.5 * $storage_level + $research_bonus;
+
+        $stores = $city->buildings->where('type', 4)->filter(function($building) use ($now){
             return (($building->finished_at <= $now));
         });
 
@@ -116,9 +113,6 @@ class ResourceController extends Controller
                 $storage += ($store['level'] * 100);
             }
         }
-
-        $storage += User::$user_storage[$user->nation];
-
         return $storage;
     }
     

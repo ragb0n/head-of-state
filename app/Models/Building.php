@@ -9,10 +9,14 @@ class Building extends Model
 {
     use HasFactory;
 
+    protected $dates = array('finished_at');
+
     protected $fillable = [
+        'id',
         'city_id',
         'type',
         'level',
+        'finished_at'
     ];
 
     public static $building_names =[
@@ -27,37 +31,37 @@ class Building extends Model
         '9' => 'Fort'
     ];
 
-    // public static $basic_building_prices = [
-    //     '1' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '2' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '3' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '4' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '5' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '6' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '7' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '8' => ['money' => 10, 'stone' => 10, 'wood' => 10],
-    //     '9' => ['money' => 10, 'stone' => 10, 'wood' => 10]
-    // ];
+    public static $building_prices = [
+        '1' => ['silver' => 40, 'stone' => 50, 'wood' => 65],
+        '2' => ['silver' => 50, 'stone' => 77, 'wood' => 50],
+        '3' => ['silver' => 70, 'stone' => 65, 'wood' => 75],
+        '4' => ['silver' => 40, 'stone' => 50, 'wood' => 60],
+        '5' => ['silver' => 30, 'stone' => 40, 'wood' => 45],
+        '6' => ['silver' => 70, 'stone' => 80, 'wood' => 90],
+        '7' => ['silver' => 90, 'stone' => 170, 'wood' => 200],
+        '8' => ['silver' => 240, 'stone' => 180, 'wood' => 220],
+        '9' => ['silver' => 20, 'stone' => 100, 'wood' => 50]
+    ];
 
     public static $building_times = [
-        '1' => 60,
-        '2' => 60,
-        '3' => 60,
-        '4' => 60,
-        '5' => 60,
-        '6' => 60,
-        '7' => 60,
-        '8' => 60,
-        '9' => 60
+        '1' => 450,
+        '2' => 450,
+        '3' => 540,
+        '4' => 510,
+        '5' => 450,
+        '6' => 600,
+        '7' => 900,
+        '8' => 3000,
+        '9' => 1800
     ];
 
     public function task()
     {
-        return $this->hasMany('App\Task', 'building_id');
+        return $this->hasMany('App\Models\Task', 'building_id');
     }
 
     public function city()
     {
-        return $this->belongsTo('App\City', 'city_id');
+        return $this->belongsTo('App\Models\City', 'city_id');
     }
 }

@@ -15,23 +15,18 @@ class CreateArmiesTable extends Migration
     {
         Schema::create('armies', function (Blueprint $table) {
             $table->id();
-            $table->integer('unit_1');
-            $table->integer('unit_2');
-            $table->integer('unit_3');
-            $table->integer('unit_4');
-            $table->integer('unit_5');
-            $table->integer('unit_6');
-            $table->integer('unit_7');
-            $table->integer('unit_8');
-            $table->integer('unit_9');
-            $table->integer('unit_10');
-            $table->integer('unit_11');
-            $table->integer('unit_12');
-            $table->integer('unit_13');
-            $table->integer('user_id');
+            $table->integer('militia_count');
+            $table->integer('walkers_count');
+            $table->integer('slingers_count');
+            $table->integer('archers_count');
+            $table->integer('hoplites_count');
+            $table->integer('cavalrymen_count');
+            $table->integer('chariots_count');
+            $table->integer('catapults_count');
+            $table->integer('city_id');
             $table->integer('current_field_id');
-            $table->integer('path_id');
-            $table->integer('task_id');
+            $table->integer('path_id')->nullable();
+            $table->integer('task_id')->nullable();
             $table->timestamps();
         });
     }
