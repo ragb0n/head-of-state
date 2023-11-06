@@ -10,7 +10,7 @@
 
 
 ## General info
-Project of real time strategy browser game (like Tribal Wars, OGame etc.). Project uses Laravel framework and focuses on it's most important elements, like Blade tempalte engine, Doctrine ORM, MVC etc. This project was used as a part of an engineering thesis.
+Project of real time strategy browser game (like Tribal Wars, OGame etc.). Project uses Laravel framework and was used as a part of an engineering thesis. The aim of the tesis and this project was to show in practice the use of the most important functionalities, elements of the Laravel framework on the example of a browser-based RTS game, like Blade tempalte engine, Doctrine ORM, MVC etc., so it wasn't supposed to create complete game, but only to implement functions which could use mentioned Laravel's elements.
 
 ## Used technologies
 Project is created with:
